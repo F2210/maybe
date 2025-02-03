@@ -19,7 +19,7 @@ Rails.application.configure do
 
   # Enable caching with Redis in development
   config.cache_store = :redis_cache_store, {
-    url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" },
+    url: ENV.fetch("REDIS_URL") { "redis://devcontainer-maybe_dev_redis-1:6379/1" },
     namespace: "cache",
     expires_in: 1.hour
   }

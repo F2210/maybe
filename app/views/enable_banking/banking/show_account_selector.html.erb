@@ -1,3 +1,6 @@
-<%= modal_form_wrapper title: t(".select_accounts") do %>
-<div class="space-y-6">
-    <div
+<%
+  content = capture do
+    render partial: "enable_banking/banking/account_selector"
+  end
+%>
+<%= render "shared/modal_form", title: t(".select_accounts"), content: content %>
