@@ -52,6 +52,11 @@ gem "redcarpet"
 gem "stripe"
 gem "intercom-rails"
 gem "plaid"
+gem "countries"
+
+# Use Redis for caching
+gem "redis", "~> 5.0"
+gem "redis-client", "~> 0.19.0"
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows]

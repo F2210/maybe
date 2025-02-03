@@ -1,0 +1,44 @@
+<%= modal_form_wrapper title: t(".select_account_type") do %>
+<div class="space-y-6">
+    <div class="space-y-4">
+        <% @auth_methods.each do |method| %>
+        <%= form_tag enable_banking_authorize_path, 
+              method: :post, 
+              target: "_blank",
+              rel: "noopener",
+              class: "block" do %>
+        <%= hidden_field_tag :aspsp_name, @aspsp_name %>
+        <%= hidden_field_tag :aspsp_country, @aspsp_country %>
+        <%= hidden_field_tag :psu_type, method['psu_type'] %>
+        <%= hidden_field_tag :auth_method, method['name'] %>
+        <%= hidden_field_tag :maximum_consent_validity, @maximum_consent_validity %>
+
+        <button type="submit" class="w-full">
+            <div class="w-full text-left px-4 py-4 border rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="flex items-center">
+                    <%= lucide_icon(method['psu_type'] == 'personal' ? 'user' : 'briefcase', class: "w-6 h-6 text-gray-400 mr-3") %>
+                    <div>
+                        <span class="block text-sm font-medium text-gray-900">
+                            <%= t(".#{method['psu_type']}_account") %>
+                        </span>
+                        <span class="block text-sm text-gray-500">
+                            <%= t(".#{method['psu_type']}_account_description") %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </button>
+        <% end %>
+        <% end %>
+    </div>
+
+    <div class="pt-4 border-t">
+        <%= link_to enable_banking_connect_path, 
+          class: "inline-flex items-center text-sm text-gray-500 hover:text-gray-700",
+          data: { turbo_frame: "modal" } do %>
+        <%= lucide_icon "arrow-left", class: "w-4 h-4 mr-2" %>
+        <%= t(".go_back") %>
+        <% end %>
+    </div>
+</div>
+<% end %>

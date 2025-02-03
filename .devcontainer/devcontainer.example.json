@@ -1,7 +1,7 @@
 {
   "name": "Maybe",
   "dockerComposeFile": "docker-compose.yml",
-  "service": "maybe_dev_app",
+  "service": "app",
   "workspaceFolder": "/workspace",
   "containerEnv": {
     "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",

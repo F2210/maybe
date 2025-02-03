@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  maybe_dev_app:
+  maybe-dev-app:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
@@ -11,33 +11,37 @@ services:
       - bundle_cache:/bundle
 
     ports:
-      - "3001:3000"
+      - "3000:3000"
 
     command: sleep infinity
 
     environment:
+      DB_HOST: maybe-dev-db
       HOST: "0.0.0.0"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       BUNDLE_PATH: /bundle
 
     depends_on:
-      - maybe_dev_db
-      - maybe_dev_redis
+      - maybe-dev-db
+      - maybe-dev-redis
 
-  maybe_dev_redis:
+  maybe-dev-redis:
     image: redis:latest
     ports:
       - "6379:6379"
-  maybe_dev_db:
+  maybe-dev-db:
     image: postgres:latest
     restart: unless-stopped
     volumes:
-      - /home/casaos/dockerdata/postgres:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: maybe_dev_db
-      POSTGRES_DB: maybe_dev_db
-      POSTGRES_PASSWORD: maybe_dev_db
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
-      - "5433:5432"
+      - "5432:5432"
 
 volumes:
+  postgres-data:
   bundle_cache:

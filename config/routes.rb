@@ -5,6 +5,16 @@ Rails.application.routes.draw do
   get "feedback", to: "pages#feedback"
   get "early-access", to: "pages#early_access"
 
+  # Enable Banking routes
+  namespace :enable_banking do
+    get "connect", to: "banking#connect"
+    get "callback", to: "banking#callback"
+    post "authorize", to: "banking#authorize"
+    get "psu_type", to: "banking#psu_type"
+    get "show_account_selector", to: "banking#show_account_selector"
+    post "import_accounts", to: "banking#import_accounts"
+  end
+
   resource :registration, only: %i[new create]
   resources :sessions, only: %i[new create destroy]
   resource :password_reset, only: %i[new create edit update]

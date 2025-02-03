@@ -1,0 +1,80 @@
+<%= modal_form_wrapper title: t(".title") do %>
+<div class="space-y-6">
+    <%# Country selector %>
+    <div>
+        <% if @countries.present? %>
+        <%= form_tag enable_banking_connect_path, method: :get, class: "flex items-center gap-2", data: { controller: "auto-submit" } do %>
+        <%= select_tag :country, 
+            options_for_select(
+              @countries.map { |country| [country[0], country[1]] },
+              @country
+            ),
+            class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
+            data: { action: "change->auto-submit#submit" } %>
+        <% end %>
+        <% else %>
+        <div class="text-center py-12">
+            <div class="text-gray-400">
+                <%= lucide_icon "globe", class: "w-12 h-12 mx-auto" %>
+            </div>
+            <h3 class="mt-2 text-sm font-medium text-gray-900"><%= t(".no_countries") %></h3>
+            <p class="mt-1 text-sm text-gray-500"><%= t(".no_countries_message") %></p>
+        </div>
+        <% end %>
+    </div>
+
+    <%# ASPSPs grid %>
+    <div class="grid grid-cols-2 gap-4">
+        <% @aspsps.each do |aspsp| %>
+        <%= form_tag enable_banking_authorize_path, method: :post, class: "contents" do %>
+        <%= hidden_field_tag :aspsp_id, aspsp["id"] %>
+        <%= hidden_field_tag :aspsp_name, aspsp["name"] %>
+        <%= hidden_field_tag :aspsp_country, @country %>
+        <%= hidden_field_tag :maximum_consent_validity, aspsp["maximum_consent_validity"] %>
+        <%= link_to enable_banking_psu_type_path(
+          aspsp_id: aspsp["id"],
+          aspsp_name: aspsp["name"],
+          aspsp_country: @country,
+          auth_methods: aspsp["auth_methods"],
+          maximum_consent_validity: aspsp["maximum_consent_validity"]
+        ),
+        data: { turbo_frame: "modal" },
+        class: "flex flex-col items-center justify-center p-4 border rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" do %>
+        <div class="w-20 h-20 flex items-center justify-center bg-white rounded-lg mb-3">
+            <% if aspsp["logo"].present? %>
+            <%= image_tag aspsp["logo"], 
+                    class: "w-full h-full object-contain p-2", 
+                    alt: "#{aspsp["name"]} logo",
+                    loading: "lazy" %>
+            <% else %>
+            <div class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-lg">
+                <%= image_tag "enable-banking.svg", class: "w-8 h-8 text-gray-400" %>
+            </div>
+            <% end %>
+        </div>
+        <span class="text-sm font-medium text-gray-900 text-center mb-2"><%= aspsp["name"] %></span>
+        <% end %>
+        <% end %>
+        <% end %>
+    </div>
+
+    <% if @aspsps.empty? %>
+    <div class="text-center py-12">
+        <div class="text-gray-400">
+            <%= lucide_icon "alert-circle", class: "w-12 h-12 mx-auto" %>
+        </div>
+        <h3 class="mt-2 text-sm font-medium text-gray-900"><%= t(".no_aspsps") %></h3>
+        <p class="mt-1 text-sm text-gray-500"><%= t(".no_aspsps_message") %></p>
+    </div>
+    <% end %>
+
+    <div class="pt-4 border-t">
+        <%= link_to new_account_path, 
+            class: "inline-flex items-center text-sm text-gray-500 hover:text-gray-700",
+            data: { turbo_frame: "modal" } do %>
+        <%= lucide_icon "arrow-left", class: "w-4 h-4 mr-2" %>
+        <%= t(".go_back") %>
+        <% end %>
+    </div>
+</div>
+<% end %>

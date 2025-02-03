@@ -1,0 +1,5 @@
+en:
+  enable_banking:
+    banking:
+      show_account_selector:
+        session_expired: "Your session has expired. Please try connecting to your bank again." 

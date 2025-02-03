@@ -1,0 +1,65 @@
+<div class="space-y-6">
+  <div class="flex items-start justify-between">
+    <div>
+      <h3 class="text-base font-medium text-gray-900">Enable Banking Integration</h3>
+      <p class="mt-1 text-sm text-gray-500">
+        Connect your Maybe instance to Enable Banking. You'll need to 
+        <a href="https://enablebanking.com/docs/api/quick-start/#signing-up-for-an-account" target="_blank" class="text-blue-600 hover:text-blue-800">
+          sign up for an Enable Banking account
+        </a>
+        to get your credentials.
+      </p>
+      <p class="mt-1 text-sm text-gray-500">
+        Current environment: <span class="font-medium"><%= Setting.enable_banking_environment %></span>
+      </p>
+    </div>
+    <div>
+      <%= form_with model: Setting, 
+          url: settings_hosting_path, 
+          method: :patch,
+          data: { controller: "auto-submit" } do |f| %>
+        <%= f.label :enable_banking_enabled, class: "relative inline-flex items-center cursor-pointer" do %>
+          <%= f.check_box :enable_banking_enabled, 
+              class: "sr-only peer",
+              data: { 
+                action: "change->auto-submit#submit"
+              } %>
+          <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="space-y-4" data-controller="toggle" data-toggle-target="content" data-toggle-show-value="<%= Setting.enable_banking_enabled %>">
+    <%= form_with model: Setting, url: settings_hosting_path, method: :patch, class: "space-y-6" do |f| %>
+      <div>
+        <%= f.label :enable_banking_app_id, "App ID", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :enable_banking_app_id,
+            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
+            placeholder: "Your Enable Banking App ID" %>
+      </div>
+
+      <div>
+        <%= f.label :enable_banking_private_key, "Private Key", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_area :enable_banking_private_key,
+            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
+            rows: 5,
+            placeholder: "Your Enable Banking Private Key" %>
+      </div>
+
+      <div>
+        <%= f.label :enable_banking_redirect_url, "Redirect URL", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :enable_banking_redirect_url,
+            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
+            placeholder: "https://your-domain.com/enable-banking/callback" %>
+        <p class="mt-1 text-sm text-gray-500">
+          This URL needs to be registered in your Enable Banking dashboard.
+        </p>
+      </div>
+
+      <div class="pt-4">
+        <%= f.submit "Save Changes", class: "inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+      </div>
+    <% end %>
+  </div>
+</div> 

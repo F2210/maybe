@@ -1,0 +1,5 @@
+nl:
+  enable_banking:
+    banking:
+      show_account_selector:
+        session_expired: "Uw sessie is verlopen. Maak opnieuw verbinding met uw bank." 

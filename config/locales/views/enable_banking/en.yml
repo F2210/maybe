@@ -1,0 +1,36 @@
+---
+en:
+  enable_banking:
+    connect:
+      title: Select your bank
+      no_aspsps: No banks available
+      no_aspsps_message: No banks were found for the selected country. Please try another country or contact support.
+      no_countries: No countries available
+      no_countries_message: Unable to fetch available countries. Please try again later or contact support.
+      go_back: Back to account creation
+    psu_type_selector:
+      select_account_type: Select Account Type
+      personal_account: Personal Account
+      personal_account_description: For individual banking accounts
+      business_account: Business Account
+      business_account_description: For business or corporate banking accounts
+      go_back: Back to bank selection
+    authorization_info:
+      title: Bank Authorization
+      subtitle: Connect your bank account securely
+      step_1_title: You'll be redirected to your bank
+      step_1_description: We'll take you to your bank's secure login page in a new window.
+      step_2_title: Log in and authorize
+      step_2_description: Log in to your bank account and authorize Maybe to access your account information.
+      step_3_title: Return to Maybe
+      step_3_description: After authorization, you'll be automatically redirected back to Maybe to complete the setup.
+      go_back: Back
+      continue: Continue to bank authorization
+    connection_status:
+      title: Connection Status
+      success_title: Successfully Connected
+      success_message: Your bank account has been successfully connected to Maybe.
+      error_title: Connection Failed
+      error_message: "Unable to connect your bank account: %{message}"
+      view_accounts: View your accounts
+      try_again: Try again 

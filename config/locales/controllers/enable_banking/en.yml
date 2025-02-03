@@ -1,0 +1,25 @@
+---
+en:
+  enable_banking:
+    callback:
+      success: Successfully connected to Enable Banking
+      error: "Failed to connect to Enable Banking: %{message}"
+      session_error: "Failed to create Enable Banking session"
+    not_configured: Enable Banking is not properly configured
+    invalid_state: Invalid state parameter. Please try again.
+    import_accounts:
+      success: "Successfully imported %{count} accounts"
+      error: "Failed to import %{count} accounts"
+      no_accounts_selected: Please select at least one account to import
+    account_selector:
+      select_accounts: Select Accounts to Import
+      subtitle: Choose which accounts to import
+      description: Select one or more accounts to import transactions and balances
+      import_selected: Import Selected Accounts
+      go_back: Go Back
+    psu_type_selector:
+      select_account_type: "Select Account Type"
+      personal_account: "Personal Account"
+      personal_account_description: "For individual banking accounts"
+      business_account: "Business Account"
+      business_account_description: "For business or corporate banking accounts"

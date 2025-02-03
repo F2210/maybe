@@ -66,3 +66,9 @@ coverage
 
 # Ignore node related files
 node_modules
+
+# Ignore credentials file
+config/credentials.yml.enc
+
+# Ignore credentials file swap file
+..enc.swp

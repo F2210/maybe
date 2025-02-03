@@ -22,4 +22,14 @@ class Setting < RailsSettings::Base
   field :require_invite_for_signup, type: :boolean, default: false
 
   field :require_email_confirmation, type: :boolean, default: ENV.fetch("REQUIRE_EMAIL_CONFIRMATION", "true") == "true"
+
+  # Enable Banking Integration Settings
+  field :enable_banking_app_id, type: :string, default: nil
+  field :enable_banking_private_key, type: :string, default: nil
+  field :enable_banking_redirect_url, type: :string, default: ENV["ENABLE_BANKING_REDIRECT_URL"]
+  field :enable_banking_enabled, type: :boolean, default: false
+
+  def self.enable_banking_environment
+    ENV.fetch("ENABLE_BANKING_ENVIRONMENT", "sandbox")
+  end
 end
